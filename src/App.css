@@ -1,20 +1,27 @@
 body{
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
 .gridContainer{
   background-color: gray;
+  display: inline-block;
 }
 .grid{
   color: white;
   display: grid;
-  grid-template-rows: repeat(15, 34px);
-  grid-template-columns: repeat(20, 34px);
+  grid-template-rows: repeat(var(--rows, 10), 34px);
+  grid-template-columns: repeat(var(--cols, 10), 34px);
+  gap: 3px;
+  margin: 4px;
 }
 
 .box{
-  background-color: black;
-  width: 30px;
-  height: 30px;
+  /* background-color: black; */
+  border: 2px;
+}
+
+.box:hover{
+  cursor: pointer;
 }
 
