@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function FallingRainGrid({rows = 10, cols = 10}){
     const [raindrops, setRaindrops] = useState([]);
@@ -9,12 +9,13 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
         const interval = setInterval(() => {
 
             setRaindrops(prevDrops => {
-                // update raindrops position
-                const updatedDrops = prevDrops
-                    .filter(drop => drop.row < rows)
-                    .map(drop => ({...drop, row:drop.row + 1})
-                );
-
+                // filter drops that have fallen below grid
+                const updatedDrops = prevDrops.filter(drop => drop.row < rows - 1);
+                
+                // update their position
+                for(const drop of updatedDrops){
+                    drop.row += 1;
+                }
 
                 // add a new drop randomly
                 if(Math.random() < 0.8){
@@ -38,10 +39,20 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
         return ()=> clearInterval(interval);
     }, [])
 
+    // Memoizing the presence of raindrops
+    const raindropMap = useMemo(()=>{
+        const map = new Set()
+        raindrops.forEach((drop)=>{
+            map.add(`${drop.row}-${drop.col}`)
+        })
+
+        return map;
+    }, [raindrops])
+
     const hasRaindrop = (index) =>{
         const r = Math.floor(index / cols);
         const c = index % cols;
-        return raindrops.some(drop => drop.row == r && drop.col == c);
+        return raindropMap.has(`${r}-${c}`)
     }
 
 
