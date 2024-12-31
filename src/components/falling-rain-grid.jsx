@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 export default function FallingRainGrid({rows = 10, cols = 10}){
     const [raindrops, setRaindrops] = useState([]);
     const [hue, setHue] = useState(240) // represents blue in hsl
-
+    const trailLength = 6;
     // raindrop falling effect
     useEffect(()=>{
         const interval = setInterval(() => {
@@ -17,14 +17,20 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
                     drop.row += 1;
                 }
 
-                // add a new drop randomly
+                // add a new drop (with trail) randomly
                 if(Math.random() < 0.8){
-                    const newDrop = {col:Math.floor(Math.random() * cols), row:0}
-                    updatedDrops.push(newDrop);
+                    const colPos = Math.floor(Math.random() * cols);
+                    let trailPos = 0; // distance from head of trail
+                    let rowPos = 0;
+                    for(let i = 0; i < trailLength; i++){
+                        const newDrop = {col:colPos, row:rowPos, trailPos:trailPos};
+                        updatedDrops.push(newDrop);
+                        rowPos -= 1;
+                        trailPos += 1;
+                    }
                 }
                 return updatedDrops;
             });
-            console.log(raindrops)
         }, 70);
 
         return () => clearInterval(interval);
@@ -41,18 +47,23 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
 
     // Memoizing the presence of raindrops
     const raindropMap = useMemo(()=>{
-        const map = new Set()
+        const map = new Map()
         raindrops.forEach((drop)=>{
-            map.add(`${drop.row}-${drop.col}`)
+            map.set(`${drop.row}-${drop.col}`, drop.trailPos);
         })
 
         return map;
     }, [raindrops])
 
-    const hasRaindrop = (index) =>{
+    const getColor = (index) =>{
         const r = Math.floor(index / cols);
         const c = index % cols;
-        return raindropMap.has(`${r}-${c}`)
+        if (!raindropMap.has(`${r}-${c}`)){
+            return ""
+        }
+        const trailPos = raindropMap.get(`${r}-${c}`)
+        const opacity = 1 - (trailPos / trailLength)
+        return `hsla(${hue}, 100%, 45%, ${opacity})`
     }
 
 
@@ -63,7 +74,7 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
                     <div 
                         key={i} 
                         className={`box`}
-                        style={{backgroundColor:hasRaindrop(i) ? `hsl(${hue}, 100%, 45%)` : ''}}
+                        style={{backgroundColor:getColor(i)}}
                     >
                         {i + 1}
                     </div>
