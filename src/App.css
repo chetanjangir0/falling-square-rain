@@ -8,17 +8,15 @@ body{
   display: inline-block;
 }
 .grid{
-  color: white;
+  background-color: black;
   display: grid;
   grid-template-rows: repeat(var(--rows, 10), 34px);
   grid-template-columns: repeat(var(--cols, 10), 34px);
-  gap: 3px;
   margin: 4px;
 }
 
 .box{
-  background-color: black;
-  border: 2px;
+  border: 2px solid gray;
 }
 
 .box:hover{

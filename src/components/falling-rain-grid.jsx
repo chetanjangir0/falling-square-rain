@@ -73,11 +73,9 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
                 {Array(rows * cols).fill().map((_, i)=>(
                     <div 
                         key={i} 
-                        className={`box`}
+                        className={"box"}
                         style={{backgroundColor:getColor(i)}}
-                    >
-                        {i + 1}
-                    </div>
+                    />
                 ))}
             </div>
         </section>
