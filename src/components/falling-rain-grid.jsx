@@ -58,10 +58,9 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
     const getColor = (index) =>{
         const r = Math.floor(index / cols);
         const c = index % cols;
-        if (!raindropMap.has(`${r}-${c}`)){
-            return ""
-        }
-        const trailPos = raindropMap.get(`${r}-${c}`)
+        const key = `${r}-${c}`;
+        if (!raindropMap.has(key)) return "";
+        const trailPos = raindropMap.get(key)
         const opacity = 1 - (trailPos / trailLength)
         return `hsla(${hue}, 100%, 45%, ${opacity})`
     }

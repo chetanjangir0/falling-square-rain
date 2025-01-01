@@ -5,6 +5,7 @@ body{
 
 .gridContainer{
   background-color: gray;
+  border-radius: 3px;
   display: inline-block;
 }
 .grid{

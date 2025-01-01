@@ -1,8 +1,37 @@
-# React + Vite
+# Falling Raindrops Grid
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React component that creates an animated grid of colorful falling raindrops with trailing effects. Built with Vite and React.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/falling-raindrops-grid
+cd falling-raindrops-grid
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+### Props
+
+- `rows` (optional): Number of grid rows (default: 10)
+- `cols` (optional): Number of grid columns (default: 10)
+
+## Features
+
+- Animated raindrops with trailing effects
+- Color transitions through HSL spectrum
+- Customizable grid dimensions
+- Optimized performance with React hooks
+
+## Development
+
+Built using:
+- Vite
+- React
+- CSS Grid
+- Modern JavaScript features
