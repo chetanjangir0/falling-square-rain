@@ -21,7 +21,7 @@ function App() {
           <input
             type="range"
             min="5"
-            max="20"
+            max="40"
             value={gridSize.rows}
             onChange={(e) => setGridSize((prev) => ({ ...prev, rows: +e.target.value }))} // + converts the string to numbers
           />
@@ -31,7 +31,7 @@ function App() {
           <input
             type="range"
             min="5"
-            max="20"
+            max="40"
             value={gridSize.cols}
             onChange={(e) => setGridSize((prev) => ({ ...prev, cols: +e.target.value }))}
           />
