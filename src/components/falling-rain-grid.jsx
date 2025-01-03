@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-export default function FallingRainGrid({rows = 10, cols = 10, rainDensity = 80}){
+export default function FallingRainGrid({rows = 10, cols = 10, rainDensity = 80, rainSpeed = 70}){
     const [raindrops, setRaindrops] = useState([]);
     const [hue, setHue] = useState(240) // represents blue in hsl
     const trailLength = 6;
@@ -25,10 +25,10 @@ export default function FallingRainGrid({rows = 10, cols = 10, rainDensity = 80}
                 }
                 return updatedDrops;
             });
-        }, 70);
+        }, rainSpeed);
 
         return () => clearInterval(interval);
-    }, [cols, rows, rainDensity])
+    }, [cols, rows, rainDensity, rainSpeed])
 
     // color transition effect
     useEffect(()=>{
@@ -90,7 +90,6 @@ export default function FallingRainGrid({rows = 10, cols = 10, rainDensity = 80}
                     />
                 ))}
             </div>
-            <div>{rainDensity}</div>
         </section>
     </>
 }

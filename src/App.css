@@ -61,3 +61,8 @@ label {
 input[type="range"] {
   width: 100%;
 }
+
+.sliders{
+  display: flex;
+  gap: 2vh;
+}
