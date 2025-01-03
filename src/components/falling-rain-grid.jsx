@@ -20,14 +20,8 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
                 // add a new drop (with trail) randomly
                 if(Math.random() < 0.8){
                     const colPos = Math.floor(Math.random() * cols);
-                    let trailPos = 0; // distance from head of trail
                     let rowPos = 0;
-                    for(let i = 0; i < trailLength; i++){
-                        const newDrop = {col:colPos, row:rowPos, trailPos:trailPos};
-                        updatedDrops.push(newDrop);
-                        rowPos -= 1;
-                        trailPos += 1;
-                    }
+                    addDrop(rowPos, colPos, updatedDrops);
                 }
                 return updatedDrops;
             });
@@ -65,6 +59,24 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
         return `hsla(${hue}, 100%, 45%, ${opacity})`
     }
 
+    const addDrop = (rowPos, colPos, updatedDrops)=>{
+        let trailPos = 0; // distance from head of trail
+        for(let i = 0; i < trailLength; i++){
+            const newDrop = {col:colPos, row:rowPos, trailPos:trailPos};
+            updatedDrops.push(newDrop);
+            rowPos -= 1;
+            trailPos += 1;
+        }
+    }
+    const handleClick = (index)=>{
+        const row = Math.floor(index / cols);
+        const col = index % cols;
+        setRaindrops((prevDrops) => {
+            const updatedDrops = [...prevDrops];
+            addDrop(row, col, updatedDrops); 
+            return updatedDrops;
+        });
+    }
 
     return <>
         <section className="gridContainer">
@@ -74,6 +86,7 @@ export default function FallingRainGrid({rows = 10, cols = 10}){
                         key={i} 
                         className={"box"}
                         style={{backgroundColor:getColor(i)}}
+                        onClick={()=>handleClick(i)}
                     />
                 ))}
             </div>
