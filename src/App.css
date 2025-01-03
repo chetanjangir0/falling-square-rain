@@ -41,7 +41,7 @@ body::before {
   cursor: pointer;
 }
 
-.sliderContainer {
+.slider-container {
   margin-bottom: 2vh;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.4);
