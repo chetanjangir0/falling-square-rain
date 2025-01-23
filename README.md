@@ -17,17 +17,13 @@ npm install
 npm run dev
 ```
 
-### Props
-
-- `rows` (optional): Number of grid rows (default: 10)
-- `cols` (optional): Number of grid columns (default: 10)
-
 ## Features
 
 - Animated raindrops with trailing effects
 - Color transitions through HSL spectrum
 - Customizable grid dimensions
 - Optimized performance with React hooks
+- Sliders to control the behaviour of the raindrops
 
 ## Development
 
