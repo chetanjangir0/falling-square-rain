@@ -1,6 +1,7 @@
 # Falling Raindrops Grid
 
 A React component that creates an animated grid of colorful falling raindrops with trailing effects. Built with Vite and React.
+For live preview of the site [click here](https://falling-square-rain.vercel.app/)
 
 ## Installation
 
